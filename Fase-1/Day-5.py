@@ -1,42 +1,42 @@
 # function
 # function adalah kode yang bisa dipanggil berkali-kali tanpa harus menulis ulang kode
 
-def sapa():
-    print("halo, semua")
+# def sapa():
+#     print("halo, semua")
 
-sapa()
-sapa()
+# sapa()
+# sapa()
 
-# function dengan parameter
-# parameter itu data yang kamu kirim ke dalam function
+# # function dengan parameter
+# # parameter itu data yang kamu kirim ke dalam function
 
-def sapa(nama):
-    print("halo, ", nama)
+# def sapa(nama):
+#     print("halo, ", nama)
 
-sapa("chisa")
+# sapa("chisa")
 
-def perkenalan(iniial, umur):
-    print(f"Nama saya {iniial}, dan umur saya adalah {umur}")
+# def perkenalan(iniial, umur):
+#     print(f"Nama saya {iniial}, dan umur saya adalah {umur}")
 
-perkenalan("chisa", 19)
+# perkenalan("chisa", 19)
 
-# function dengan return
-# function bisa mengembalikan nilai untuk dipakai di luar
+# # function dengan return
+# # function bisa mengembalikan nilai untuk dipakai di luar
 
-def tambah(a, b):
-    return a+b
+# def tambah(a, b):
+#     return a+b
 
-hasil = tambah(5, 4)
-print("hasil: ", hasil)  
+# hasil = tambah(5, 4)
+# print("hasil: ", hasil)  
 
-# default parameter 
-# parameter bisa mempunyai nilai default kalau tidak diisi
+# # default parameter 
+# # parameter bisa mempunyai nilai default kalau tidak diisi
 
-def sapaan(siapa, salam="halo"):
-    print(salam + ",", siapa)
+# def sapaan(siapa, salam="halo"):
+#     print(salam + ",", siapa)
 
-sapaan("chisa")
-sapaan("chisa", "hai")
+# sapaan("chisa")
+# sapaan("chisa", "hai")
 
 # ==========================================================================
 
