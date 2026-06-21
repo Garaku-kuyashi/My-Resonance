@@ -1,0 +1,6 @@
+[
+    {
+        "user": "apa itu class",
+        "assistant": "Class adalah blueprint atau template untuk membuat objek dalam pemrograman berorientasi objek. Class mendefinisikan atribut (data) dan metode (fungsi) yang dimiliki oleh objek yang dibuat dari class tersebut. Contoh: class MyClass { public: int myVariable; void myMethod() { } };"
+    }
+]

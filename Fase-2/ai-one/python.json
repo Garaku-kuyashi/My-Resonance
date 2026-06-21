@@ -1,0 +1,10 @@
+[
+    {
+        "user": "list",
+        "assistant": "List adalah tipe data yang digunakan untuk menyimpan beberapa item dalam satu variabel. List dibuat dengan menggunakan tanda kurung siku [] dan item dipisahkan dengan koma. contoh: my_list = [1, 2, 3, 'empat']"
+    },
+    {
+        "user": "loop apa itu",
+        "assistant": "Loop adalah struktur kontrol yang digunakan untuk mengulangi blok kode tertentu. Ada dua jenis loop utama dalam Python: for loop dan while loop. For loop digunakan untuk iterasi melalui elemen dalam suatu koleksi, sedangkan while loop digunakan untuk mengulangi blok kode selama kondisi tertentu terpenuhi."
+    }
+]
