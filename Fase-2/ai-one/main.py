@@ -191,3 +191,10 @@ while True:
 # file_aktif adalah sebuah variabel global yang digunakan untuk menyimpan nama file JSON yang saat ini aktif atau sedang digunakan untuk menyimpan atau memuat riwayat percakapan. Variabel ini diperbarui setiap kali pengguna menyimpan atau memuat riwayat percakapan dari file JSON tertentu, sehingga program dapat menampilkan informasi tentang file yang sedang digunakan kepada pengguna.
 
 # import adalah sebuah pernyataan yang digunakan untuk mengimpor modul atau pustaka eksternal ke dalam program Python. Dalam konteks program ini, import json digunakan untuk mengimpor modul json yang menyediakan fungsi-fungsi untuk bekerja dengan data dalam format JSON, seperti menyimpan dan memuat riwayat percakapan ke atau dari file JSON. Dengan mengimpor modul json, program dapat menggunakan fungsi-fungsi yang disediakan oleh modul tersebut untuk melakukan operasi terkait JSON.
+
+# ------- day 3 ----------
+# enumerate adalah sebuah fungsi bawaan Python yang digunakan untuk mengembalikan pasangan indeks dan nilai dari sebuah iterable, seperti list atau tuple. Fungsi ini sering digunakan dalam loop for untuk mendapatkan indeks elemen saat iterasi. Dalam konteks program ini, enumerate dapat digunakan untuk menampilkan daftar karakter dengan nomor urut saat pengguna memilih karakter untuk berinteraksi.
+
+# isdigit() adalah sebuah metode string yang digunakan untuk memeriksa apakah semua karakter dalam string adalah digit (angka). Dalam konteks program ini, pilihan.isdigit() digunakan untuk memeriksa apakah input pengguna berupa angka, sehingga program dapat memastikan bahwa pengguna memasukkan nomor karakter yang valid saat memilih karakter untuk berinteraksi.
+
+# import os adalah sebuah pernyataan yang digunakan untuk mengimpor modul os ke dalam program Python. Modul os menyediakan fungsi-fungsi untuk berinteraksi dengan sistem operasi, seperti membuat folder, menghapus file, dan mengambil path file. Dalam konteks program ini, modul os dapat digunakan untuk membuat folder untuk menyimpan riwayat chat dan mengambil path file untuk menyimpan atau memuat riwayat chat karakter.
