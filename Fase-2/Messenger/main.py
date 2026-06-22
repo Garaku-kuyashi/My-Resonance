@@ -144,5 +144,7 @@ while True:
             "assistant" : jawaban
         })
 
+        karakter_dipilih["pesan_terakhir"] = jawaban
+
         simpan_chat_karakter(karakter_dipilih, history_chat)
         print(f"{karakter_dipilih['nama']}: {jawaban}")
