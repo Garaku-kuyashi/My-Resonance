@@ -1,6 +1,8 @@
 import json
 import os
 
+FILE_KARAKTER = "karakter.json"
+
 karakter_list = [
     {
         "nama" : "Kei Tendou",
@@ -92,6 +94,26 @@ def simpan_chat_karakter(karakter, history):
             json.dump(history, file, ensure_ascii=False, indent=4)
     except Exception as e:
         print(f"Terjadi kesalahan saat menyimpan riwayat chat ke {path_file}: {e}")
+
+def simpan_data_karakter():
+    try:
+        with open(FILE_KARAKTER, "w", encoding="utf-8") as file:
+            json.dump(karakter_list, file, ensure_ascii=False, indent=4)
+    except Exception as e:
+        print(f"Terjadi kesalahan saat menyimpan data karakter ke {FILE_KARAKTER}: {e}")
+
+def load_data_karakter():
+    global karakter_list
+
+    try:
+        with open(FILE_KARAKTER, "r", encoding="utf-8") as file:
+            karakter_list = json.load(file)
+    except FileNotFoundError:
+        simpan_data_karakter()
+    except json.JSONDecodeError:
+        print("Terjadi kesalahan saat memuat riwayat chat dari. File mungkin rusak.")
+    except Exception as e:
+        print(f"Terjadi kesalahan saat menyimpan data karakter ke {FILE_KARAKTER}: {e}")
 
 while True:
     tampilkan_daftar_karakter()
