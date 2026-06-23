@@ -115,6 +115,8 @@ def load_data_karakter():
     except Exception as e:
         print(f"Terjadi kesalahan saat menyimpan data karakter ke {FILE_KARAKTER}: {e}")
 
+load_data_karakter()
+
 while True:
     tampilkan_daftar_karakter()
     pilihan = input("\nPilih karakter (1-3) atau ketik /exit untuk keluar: ").strip()
@@ -167,6 +169,7 @@ while True:
         })
 
         karakter_dipilih["pesan_terakhir"] = jawaban
+        simpan_data_karakter()
 
         simpan_chat_karakter(karakter_dipilih, history_chat)
         print(f"{karakter_dipilih['nama']}: {jawaban}")
