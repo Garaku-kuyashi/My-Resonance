@@ -36,7 +36,9 @@ def tampilkan_daftar_karakter():
 
     for nomor, karakter in enumerate(karakter_list, start=1):
         print(f"\n{nomor}, {karakter['nama']} | {karakter['status']}")
-        print(f"Pesan terakhir: {karakter['pesan_terakhir']}")
+        # print(f"Pesan terakhir: {karakter['pesan_terakhir']}")
+        preview = potong_preview(karakter["pesan_terakhir"])
+        print(f'    "{preview}"')
 
 def jawaban_dummy(karakter, pesan_user):
     nama = karakter["nama"]
@@ -115,6 +117,11 @@ def load_data_karakter():
     except Exception as e:
         print(f"Terjadi kesalahan saat menyimpan data karakter ke {FILE_KARAKTER}: {e}")
 
+def potong_preview(teks, batas=50):
+    if len(teks) > batas:
+        return teks[:batas] + "....."
+    return teks
+
 load_data_karakter()
 
 while True:
@@ -139,7 +146,7 @@ while True:
     print(f"\n" + "-" * 40)
     print(f"Chat dengan {karakter_dipilih['nama']}")
     print(f"Status: {karakter_dipilih['status']}")
-    print("Ketik /back untuk kembali ke daftar karakter.")
+    print("Commadn: /back, /history, /clear")
     print("-" * 40)
 
     if history_chat:
@@ -156,6 +163,27 @@ while True:
         pesan_user = input("\nKamu: ").strip()
         if pesan_user.lower() == "/back":
             break
+        elif pesan_user.lower() == "/history":
+            if not history_chat:
+                print("Belum ada riwayat chat dengan karakter ini.")
+            else:
+                print("\n--- RIWAYAT CHAT---")
+
+                for chat in history_chat:
+                    print(f"Kamu: {chat['user']}")
+                    print(f"{karakter_dipilih['nama']}: {chat['assistant']}")
+                    print("-" * 25)
+            continue
+        elif pesan_user.lower() == "/clear":
+            history_chat.clear()
+            simpan_chat_karakter(karakter_dipilih, history_chat)
+
+            karakter_dipilih["pesan_terakhir"] = "Belum ada pesan..."
+            simpan_data_karakter()
+
+            print("Riwayat chat dengan karakter ini berhasil dihapus")
+            continue
+
 
         if not pesan_user:
             print("Pesan tidak boleh kosong. Silakan masukkan pesan.")
