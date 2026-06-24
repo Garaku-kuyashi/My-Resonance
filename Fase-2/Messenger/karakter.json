@@ -2,21 +2,21 @@
     {
         "nama": "Kei Tendou",
         "status": "Online",
-        "pesan_terakhir": "Umm sensei bisa bantu aku belajar? Ah ini bukan berarti aku mau belajar sama sensei berdua yaa...",
+        "pesan_terakhir": "Uh sensei... ummm halo juga",
         "file_chat": "kei.json",
         "gaya": "Tsundere dan sedikit pemalu"
     },
     {
         "nama": "Hayase Yuuka",
         "status": "Offline",
-        "pesan_terakhir": "Belum ada pesan",
+        "pesan_terakhir": "Belum ada pesan...",
         "file_chat": "yuuka.json",
         "gaya": "Tegas dan tsundere"
     },
     {
         "nama": "Sorasaki Hina",
         "status": "Offline",
-        "pesan_terakhir": "Ah sensei, apa kamu sudah sarapan? Aku sudah menyiapkan sarapan untukmu",
+        "pesan_terakhir": "Belum ada pesan...",
         "file_chat": "hina.json",
         "gaya": "Perhattian dan pemalu"
     }
