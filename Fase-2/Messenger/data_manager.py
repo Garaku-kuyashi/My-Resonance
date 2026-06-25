@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import datetime
 
 FILE_KARAKTER = "karakter.json"
 FOLDER_CHAT ="chats"
@@ -33,6 +34,53 @@ def simpan_chat_karakter(karakter, history):
             json.dump(history, file, ensure_ascii=False, indent=4)
     except Exception as e:
         print(f"Terjadi kesalahan saat menyimpan riwayat chat ke {path_file}: {e}")
+
+def backup_chat_karakter(karakter, history):
+    if not history:
+        return
+    os.makedirs("backup", exist_ok=True)
+
+    nama_file_asli = karakter["file_chat"]
+    nama_tanpa_ext = os.path.splitext(nama_file_asli)[0]
+
+    waktu_backup = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    nama_file_backup = f"{nama_tanpa_ext}_{waktu_backup}.json"
+    path_backup = os.path.join("backup", nama_file_backup)
+
+    try:
+        with open(path_backup, "w", encoding="utf-8") as file:
+            json.dump(history, file, ensure_ascii=False, indent=4)
+        print(f"Backup history berhasil dibuat: {nama_file_backup}")
+    except Exception as e:
+        print(f"Gagal membuat backup history: {e}")
+
+def ambil_daftar_backup(karakter):
+    folder_backup = "backup"
+
+    if not os.path.exists(folder_backup):
+        return[]
+
+    nama_file_asli = karakter["file_chat"]
+    nama_tanpa_ext = os.path.splitext(nama_file_asli)[0]
+
+    daftar_backup = []
+
+    for nama_file in os.listdir(folder_backup):
+        if nama_file.startswith(nama_tanpa_ext + "_") and nama_file.endswith(".json"):
+            daftar_backup.append(nama_file)
+
+    daftar_backup.sort(reverse=True)
+    return daftar_backup
+
+def load_backup_chat(nama_file_backup):
+    path_backup = os.path.join("backup", nama_file_backup)
+    try:
+        with open(path_backup, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except Exception as e:
+        print(f"Gagal membaca file backup: {e}")
+        return None
 
 def simpan_data_karakter(karakter_list):
     try:

@@ -12,7 +12,7 @@ def tampilkan_daftar_karakter(karakter_list):
     print("=" * 40)
 
     for nomor, karakter in enumerate(karakter_list, start=1):
-        print(f"\n{nomor}, {karakter['nama']} | {karakter['status']}")
+        print(f"\n{nomor}, {karakter['nama']}")
         # print(f"Pesan terakhir: {karakter['pesan_terakhir']}")
         preview = potong_preview(karakter["pesan_terakhir"])
         print(f'    "{preview}"')
@@ -41,7 +41,7 @@ def cari_karakter(kata_kunci, karakter_list):
 
     for nomor, karakter in hasil:
         preview = potong_preview(karakter["pesan_terakhir"])
-        print(f"\n{nomor}. {karakter['nama']} | {karakter['status']}")
+        print(f"\n{nomor}. {karakter['nama']}")
         print(f'   Gaya: {karakter["gaya"]}')
         print(f'   "{preview}"')
 
@@ -53,7 +53,6 @@ def info_karakter(nomor, karakter_list):
     karakter = karakter_list[nomor - 1]
     print("\n--- DETAIL KARAKTER ---")
     print(f"Nama  : {karakter['nama']}")
-    print(f"Status  : {karakter['status']}")
     print(f"Gaya  : {karakter['gaya']}")
     print(f"Pesan terakhir  : {karakter['pesan_terakhir']}")
     print(f"File chat  : {karakter['file_chat']}")
@@ -78,29 +77,26 @@ def tambah_karakter(karakter_list):
             print("Nama karakter sudah ada...")
             return
 
-    status = input("Status (Online/Offline): ").strip()
-
-    if status.lower() == "online":
-        status = "Online"
-    else:
-        status = "Offline"
-
     pesan_awal = input("Pesan awal: ").strip()
 
     if not pesan_awal:
         pesan_awal = "Belum ada pesan..."
 
     gaya = input("Gaya karakter: ").strip()
+    deskripsi = input("Deskripsi karakter: ").strip()
 
     if not gaya:
         gaya = "ramah"
 
+    if not deskripsi:
+        deskripsi = "Karakter yang ramah dan sopan"
+
     karakter_baru = {
         "nama" : nama,
-        "status" : status,
         "pesan_terakhir" : pesan_awal,
         "file_chat" : buat_nama_file(nama),
-        "gaya" : gaya
+        "gaya" : gaya,
+        "dekripsi" : deskripsi
     }
 
     karakter_list.append(karakter_baru)
@@ -116,14 +112,14 @@ def edit_karakter(nomor, karakter_list):
 
     print("\n--- EDIT KARAKTER ---")
     print(f"Nama sekarang                 : {karakter['nama']}")
-    print(f"Status sekarang               : {karakter['status']}")
     print(f"Gaya sekarang                 : {karakter['gaya']}")
+    print(f"Deskripsi sekarang            : {karakter.get('deskripsi', 'Belum ada deskripsi')}")
     print(f"Pesan terakhir sekarang       : {karakter['pesan_terakhir']}")
     print("\nKosongkan input jika tidak ingin mengubah bagian tersebut.")
 
     nama_baru = input("Nama baru: ").strip()
-    status_baru = input("Status baru (Online/Offline): ").strip()
     gaya_baru = input("Gaya baru: ").strip()
+    deskripsi_baru = input("Deskripsi baru: ").strip()
     pesan_baru = input("Pesan baru: ").strip()
 
     if nama_baru:
@@ -142,16 +138,12 @@ def edit_karakter(nomor, karakter_list):
         karakter["nama"] = nama_baru
         karakter["file_chat"] = file_baru
 
-    if status_baru:
-        if status_baru.lower() == "online":
-            karakter["status"] = "Online"
-        elif status_baru.lower() == "offline":
-            karakter["status"] = "Offline"
-        else:
-            print("Status tidak valid. Status lama tetap dipakai...")
 
     if gaya_baru:
         karakter["gaya"] = gaya_baru
+
+    if deskripsi_baru:
+        karakter["deskripsi"]  = deskripsi_baru
 
     if pesan_baru:
         karakter["pesan_terakhir"] = pesan_baru

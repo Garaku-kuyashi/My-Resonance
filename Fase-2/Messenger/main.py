@@ -19,29 +19,7 @@ from chat_manager import buka_chat
 FILE_KARAKTER = "karakter.json"
 FOLDER_CHAT ="chats"
 
-karakter_list = [
-    {
-        "nama" : "Kei Tendou",
-        "status" : "Online",
-        "pesan_terakhir" : "Umm... selamat pagi senseii",
-        "file_chat" : "kei.json",
-        "gaya" : "Tsundere dan sedikit pemalu"
-    },
-    {
-        "nama" : "Hayase Yuuka",
-        "status" : "Offline",
-        "pesan_terakhir" : "Sensei, jangan lupa periksa jadwal hari ini yaa",
-        "file_chat" : "yuuka.json",
-        "gaya" : "Tegas dan tsundere"
-    },
-    {
-        "nama" : "Sorasaki Hina",
-        "status" : "Offline",
-        "pesan_terakhir" : "Ah sensei, apa kamu sudah sarapan? Aku sudah menyiapkan sarapan untukmu",
-        "file_chat" : "hina.json",
-        "gaya" : "Perhattian dan pemalu"
-    }
-]
+karakter_list = []
 
 
 

@@ -1,27 +1,12 @@
 [
     {
-        "user": "halo kei selamat pagi",
-        "assistant": "Uh sensei... ummm halo juga"
+        "user": "halo kei",
+        "assistant": "E-eh, Sensei? H-halo...",
+        "waktu": "2026-06-25 22:06"
     },
     {
-        "user": "katanya kamu butuh bantuan belajar?",
-        "assistant": "Umm sensei bisa bantu aku belajar? Ah ini bukan berarti aku mau belajar sama sensei berdua yaa..."
-    },
-    {
-        "user": "mau belajar",
-        "assistant": "Umm sensei bisa bantu aku belajar? Ah ini bukan berarti aku mau belajar sama sensei berdua yaa..."
-    },
-    {
-        "user": "mau belajar?",
-        "assistant": "Umm sensei bisa bantu aku belajar? Ah ini bukan berarti aku mau belajar sama sensei berdua yaa..."
-    },
-    {
-        "user": "hai kei",
-        "assistant": "Uh sensei... ummm halo juga"
-    },
-    {
-        "user": "halo",
-        "assistant": "Uh sensei... ummm halo juga",
-        "waktu": "2026-06-24 22:09"
+        "user": "sedang apa kamu disini?",
+        "assistant": "A-aku? T-tentu saja sedang belajar, Sensei! J-jangan salah paham ya, aku... aku cuma kebetulan saja ada di sini, b-bukan karena... apa-apa kok.",
+        "waktu": "2026-06-25 23:19"
     }
 ]

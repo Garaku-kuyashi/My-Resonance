@@ -1,43 +1,13 @@
+from gemini_service import buat_jawaban_gemini
 from data_manager import (
     load_chat_karakter,
     simpan_chat_karakter,
-    simpan_data_karakter
+    simpan_data_karakter,
+    backup_chat_karakter,
+    ambil_daftar_backup,
+    load_backup_chat
 )
 from datetime import datetime
-
-def jawaban_dummy(karakter, pesan_user):
-    nama = karakter["nama"]
-    gaya = karakter["gaya"]
-    pesan_user = pesan_user.lower()
-
-    if nama == "Kei Tendou":
-        if "halo" in pesan_user or "hai" in pesan_user:
-            return "Uh sensei... ummm halo juga"
-        elif "belajar" in pesan_user:
-            return "Umm sensei bisa bantu aku belajar? Ah ini bukan berarti aku mau belajar sama sensei berdua yaa..."
-        else:
-            return "Umm... aku belum tahu harus membalas apa untuk pesan ini, sensei"
-    elif nama == "Hayase Yuuka":
-        if "halo" in pesan_user or "hai" in pesan_user:
-            return "Halo sensei, ada yang bisa aku bantu?"
-        elif "jadwal" in pesan_user:
-            return "Jadwal hari ini sudah aku periksa, sensei. Tidak ada jadwal penting hari ini. Jadi mau jalan bareng gak sensei? Ahh bukan itu maksudku, aku cuma mau bilang kalau jadwal hari ini aman, sensei."
-        else:
-            return "Maaf sensei, aku belum tahu bagaimana membalas pesan ini."
-    elif nama == "Sorasaki Hina":
-        if "halo" in pesan_user or "hai" in pesan_user:
-            return "Halo sensei, apa kabar hari ini?"
-        elif "sarapan" in pesan_user:
-            return "Ah sensei, aku sudah menyiapkan sarapan untukmu. Silakan makan sebelum berangkat."
-        else:
-            return "Maaf sensei, aku belum tahu bagaimana membalas pesan ini."
-
-    if "halo" in pesan_user or "hai" in pesan_user:
-                return "Uh ummm halo juga"
-    elif "belajar" in pesan_user:
-        return "Ya, kita bisa belajar"
-    else:
-        return "Umm... aku belum tahu harus membalas apa untuk pesan ini"
 
 def tampilkan_history(karakter, history_chat):
      if not history_chat:
@@ -56,7 +26,7 @@ def buka_chat(karakter, karakater_list):
     print("\n" + "=" * 40)
     print(f"CHAT DENGAN {karakter['nama'].upper()}")
     print("=" * 40)
-    print("Command: /back, /history, /clear")
+    print("Command: /back, /history, /clear, /restore")
 
     while True:
         pesan_user = input("\nKamu: ").strip()
@@ -66,10 +36,67 @@ def buka_chat(karakter, karakater_list):
         elif pesan_user.lower() == "/history":
             tampilkan_history(karakter, history_chat)
             continue
+        elif pesan_user.lower() == "/restore":
+            daftar_backup = ambil_daftar_backup(karakter)
+
+            if not daftar_backup:
+                print("Belum ada backup untuk Karakter ini...")
+                continue
+            print("\n--- DAFTAR BACKUP ---")
+            
+            for nomor, nama_file in enumerate(daftar_backup, start=1):
+                print(f"{nomor}. {nama_file}")
+
+            print("0. Batal")
+
+            try:
+                pilihan_backup = int(input("Pilih backup yang ingin dipulihkan: "))
+            except ValueError:
+                print("Input harus berupa angka...")
+                continue
+
+            if pilihan_backup == 0:
+                print("Restore dibatalkan...")
+                continue
+
+            if pilihan_backup < 1 or pilihan_backup > len(daftar_backup):
+                print("Nomor backup tidak tersedia...")
+                continue
+
+            nama_file_backup = daftar_backup[pilihan_backup - 1]
+
+            konfirmasi = input(f'Ketik "restore" untuk memulihakn {nama_file_backup}').strip().lower()
+
+            if konfirmasi != "restore":
+                print("Restore dibatalkan...")
+                continue
+
+            backup_chat_karakter(karakter, history_chat)
+            history_baru = load_backup_chat(nama_file_backup)
+
+            if history_baru is None:
+                print("Restore gagal...")
+                continue
+
+            history_chat.clear()
+            history_chat.extend(history_baru)
+
+            simpan_chat_karakter(karakter, history_chat)
+
+            if history_chat:
+                karakter["pesan_terakhir"] = history_chat[-1]["assistant"]
+            else:
+                karakter["pesan_terakhir"] = "Belum ada pesan..."
+
+            simpan_data_karakter(karakater_list)
+            print(f"History berhasil dipulihkan dari {nama_file_backup}")
+            continue
+
         elif pesan_user.lower() == "/clear":
             konfirmasi = input('Ketik "hapus" untuk menghapus seluruh history chat ini: ').strip().lower()
 
             if konfirmasi == "hapus":
+                backup_chat_karakter(karakter, history_chat)
                 history_chat.clear()
                 simpan_chat_karakter(karakter, history_chat)
 
@@ -84,8 +111,16 @@ def buka_chat(karakter, karakater_list):
             print("Pesan tidak boleh kosong")
             continue
 
-        jawaban = jawaban_dummy(karakter, pesan_user)
+        print(f"{karakter['nama']} sedang mengetik...")
 
+        jawaban, berhasil = buat_jawaban_gemini(
+            karakter,
+            pesan_user,
+            history_chat
+        )
+
+        if not berhasil:
+            print(f"{karakter['nama']}: {jawaban}")
 
         waktu_sekarang = datetime.now().strftime("%Y-%m-%d %H:%M")
         history_chat.append({
